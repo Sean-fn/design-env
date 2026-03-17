@@ -1,0 +1,15 @@
+# This file contains the button replacement patterns
+# Blue pencil button:
+<SolidButton icon="fas fa-pencil-alt" variant="blue" size="tiny" rounded />
+
+# Blue copy button:
+<SolidButton icon="fas fa-copy" variant="blue" size="tiny" rounded />
+
+# Red X button:
+<SolidButton icon="fas fa-times" variant="red" size="tiny" rounded />
+
+# Blue user button:
+<SolidButton icon="fas fa-user" variant="blue" size="tiny" rounded />
+
+# Blue plus button:
+<SolidButton icon="fas fa-plus" variant="blue" size="tiny" rounded />
