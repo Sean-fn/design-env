@@ -174,22 +174,29 @@ You:  $ git checkout ocean-cargo-v2
 1. **Ask for explicit confirmation** before running — this is irreversible:
    > "這會刪除 Vercel project、本地資料夾、以及 git branch `<env-name>`。確定要繼續嗎？(y/N)"
 
-2. Only after confirmation, run from repo root:
-   ```bash
-   ./del-env.sh <env-name>
-   ```
+2. **Ask the user** whether to also clean up the local folder and git branch:
+   > "要同時刪除本地資料夾和 git branch 嗎？(y/N)"
+
+3. Only after the user answers, run from repo root with the answer piped in automatically:
+   - If user answered **yes**:
+     ```bash
+     echo "y" | ./del-env.sh <env-name>
+     ```
+   - If user answered **no**:
+     ```bash
+     echo "n" | ./del-env.sh <env-name>
+     ```
    The script will:
    - Delete the Vercel project via `vercel rm`
-   - Prompt interactively to also remove local folder + git branch (answer `y`)
-
-3. **Note:** The script itself has an interactive prompt for local cleanup. You will need to pass input to it. If running via Bash tool, answer `y` at the prompt, or advise the user to run the script manually in their terminal.
+   - Handle the local folder + git branch cleanup prompt automatically via the piped answer
 
 ### Validation Loop (Delete)
 
 1. Confirm user approved destructive action before command execution.
-2. Verify Vercel project deletion completed.
-3. Verify local folder + branch cleanup path was confirmed (`y`) if requested.
-4. If prompt handling is not possible in current execution context, stop and hand off clear manual command to user.
+2. Ask user whether to also remove local folder + git branch, and record their answer.
+3. Pipe the user's answer (`y` or `n`) into the script — do not let the script block on an interactive prompt.
+4. Verify Vercel project deletion completed.
+5. Verify local folder + branch cleanup matches what the user requested.
 
 ---
 
@@ -212,8 +219,9 @@ Next Action: <if needed>
 User: delete ocean-cargo-v2
 You:  ⚠️ 這會刪除 Vercel project、本地資料夾、以及 git branch ocean-cargo-v2。確定嗎？
 User: yes
-You:  $ ./del-env.sh ocean-cargo-v2
-      (answer y at the interactive prompt)
+You:  要同時刪除本地資料夾和 git branch 嗎？(y/N)
+User: y
+You:  $ echo "y" | ./del-env.sh ocean-cargo-v2
 ```
 
 ---
