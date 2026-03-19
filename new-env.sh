@@ -63,7 +63,7 @@ echo "Pushed to GitHub."
 # ── 5. Deploy to Vercel ──────────────────────────────────────────────────────
 echo "Deploying '$FOLDER_NAME' to Vercel..."
 cd "$FOLDER_NAME"
-DEPLOY_URL=$(vercel --yes --name "$FOLDER_NAME" --prod --no-wait --public 2>/dev/null | tail -1)
+DEPLOY_URL=$(vercel --yes --name "$FOLDER_NAME" --prod 2>&1 | grep -o 'Aliased: https://[^ ]*' | awk '{print $2}')
 
 echo ""
 echo "Done! Environment '$FOLDER_NAME' is live: $DEPLOY_URL"
