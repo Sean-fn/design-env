@@ -67,11 +67,3 @@ DEPLOY_URL=$(vercel --yes --name "$FOLDER_NAME" --prod --no-wait --public 2>/dev
 
 echo ""
 echo "Done! Environment '$FOLDER_NAME' is live: $DEPLOY_URL"
-
-# ── 6. Open Claude Code ──────────────────────────────────────────────────────
-echo ""
-read -n 1 -p "Open Claude Code in '$FOLDER_NAME'? [y/N] " OPEN_CLAUDE
-echo ""
-if [[ "$OPEN_CLAUDE" =~ ^[Yy]$ ]]; then
-  claude .
-fi
