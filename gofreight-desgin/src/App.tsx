@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
-import Breadcrumb from "./components/Breadcrumb";
 import MainContent from "./components/MainContent";
 import DesignSystemPage from "./components/DesignSystemPage";
 import MyShipmentListPage from "./components/MyShipmentListPage";
@@ -95,22 +92,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f1f3fa]">
-      {/* Header */}
-      <Header />
-      
-      {/* Sidebar */}
-      <Sidebar currentPage={currentPage} onPageChange={handlePageChange} />
-      
-      {/* Breadcrumb */}
-      <Breadcrumb
-        currentPage={currentPage === 'ai-create' && aiSubView === 'invoice' ? 'ai-invoice' : currentPage}
-        actionButton={
-          currentPage === 'ai-create' && aiSubView === 'invoice'
-            ? { label: 'Back To Shipment', onClick: () => setAiSubView('shipment') }
-            : undefined
-        }
-      />
-      
       {/* Main Content */}
       <MainContent>
         {renderPageContent()}
